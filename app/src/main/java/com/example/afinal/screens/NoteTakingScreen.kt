@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -50,12 +51,11 @@ fun NoteTakingScreen(onBackClick: () -> Unit) {
             keyboardActions = KeyboardActions(onDone = { /* Handle the done action if needed */ })
         )
         Spacer(modifier = Modifier.height(24.dp))
-        TextButton(onClick = onBackClick) {
-            Text("Back to Calculator",
-                modifier = Modifier.fillMaxWidth(),
-                style = MaterialTheme.typography.bodyMedium, // Adjust the typography style here
-                color = MaterialTheme.colorScheme.onSurface
-            )
+        // Back button
+        Button(onClick = {
+            onBackClick()
+        }) {
+            androidx.compose.material.Text("Back")
         }
     }
 }
