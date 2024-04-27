@@ -17,7 +17,7 @@ fun HelpScreen(onBackClick: () -> Unit) {
     Image(
         painter = painterResource(id = R.drawable.timer), // Use the resource ID directly
         contentDescription = "Timer Image",
-        modifier = Modifier.size(200.dp)
+        modifier = Modifier.size(300.dp)
     )
 
     Spacer(modifier = Modifier.height(16.dp))
