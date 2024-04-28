@@ -7,4 +7,5 @@ sealed class Screen {
     data object Timer : Screen()
     data object Settings : Screen()
     data object Help : Screen()
+    data object Main : Screen()
 }

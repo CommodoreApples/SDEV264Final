@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -17,11 +18,8 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun CalculatorScreen(
-    onNoteClick: () -> Unit,
-    onCalendarClick: () -> Unit,
-    onTimerClick: () -> Unit,
-    onSettingsClick: () -> Unit,
-    onHelpClick: () -> Unit) {
+    onBackClick: () -> Unit,
+    ) {
     val displayState = remember { mutableStateOf("0") }
 
     fun handleButtonClick(value: String) {
@@ -86,24 +84,10 @@ fun CalculatorScreen(
             CalculatorButton(text = "/", onClick = ::handleButtonClick)
         }
         Spacer(modifier = Modifier.height(16.dp))
-        TextButton(onClick = onNoteClick) {
-            Text("Take Notes")
-        }
-        //Spacer(modifier = Modifier.height(16.dp))
-        //TextButton(onClick = onCalendarClick) {
-        //    Text("See Calendar")
-        //}
-        Spacer(modifier = Modifier.height(16.dp))
-        TextButton(onClick = onTimerClick) {
-            Text("Set Timer")
-        }
-        Spacer(modifier = Modifier.height(16.dp))
-        TextButton(onClick = onSettingsClick) {
-            Text("Settings")
-        }
-        Spacer(modifier = Modifier.height(16.dp))
-        TextButton(onClick = onHelpClick) {
-            Text("Help")
+        Button(onClick = {
+            onBackClick()
+        }) {
+            androidx.compose.material.Text("Back")
         }
     }
 }
