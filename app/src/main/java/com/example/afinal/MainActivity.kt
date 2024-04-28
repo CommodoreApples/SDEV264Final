@@ -12,13 +12,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import com.example.afinal.screens.MainMenu
 import com.example.afinal.screens.CalculatorScreen
 import com.example.afinal.screens.HelpScreen
+import com.example.afinal.screens.MainMenu
 import com.example.afinal.screens.NoteTakingScreen
-import com.example.afinal.screens.TimerScreen
-import com.example.afinal.screens.SettingsScreen
 import com.example.afinal.screens.Screen
+import com.example.afinal.screens.SettingsScreen
+import com.example.afinal.screens.TimerScreen
+import com.example.afinal.screens.colorOptions
 import com.example.afinal.ui.theme.FinalTheme
 
 class MainActivity : ComponentActivity() {
@@ -32,16 +33,18 @@ class MainActivity : ComponentActivity() {
                 ) {
                     var currentScreen by remember { mutableStateOf<Screen>(Screen.Main) }
                     var initialTimerValue by remember { mutableStateOf(60) }
+                    var selectedColorIndex by remember { mutableStateOf(0) } // Track selected color index
 
                     Column(Modifier.fillMaxSize()) {
                         when (currentScreen) {
-                            is Screen.Main -> MainMenu(
-                                onCalculatorClick = {currentScreen = Screen.Calculator},
+                            Screen.Main -> MainMenu(
+                                onCalculatorClick = { currentScreen = Screen.Calculator },
                                 onNoteClick = { currentScreen = Screen.Notes },
                                 onCalendarClick = { currentScreen = Screen.Calendar },
                                 onTimerClick = { currentScreen = Screen.Timer },
                                 onSettingsClick = { currentScreen = Screen.Settings },
-                                onHelpClick = { currentScreen = Screen.Help }
+                                onHelpClick = { currentScreen = Screen.Help },
+                                buttonColor = colorOptions[selectedColorIndex] // Pass selected color
                             )
                             Screen.Calculator -> CalculatorScreen(
                                 onBackClick = { currentScreen = Screen.Main}
@@ -53,10 +56,10 @@ class MainActivity : ComponentActivity() {
                                 onBackClick = { currentScreen = Screen.Main}
                             )
                             Screen.Settings -> SettingsScreen(
-                                onBackClick = { currentScreen = Screen.Main},
-                                onTimerValueChanged = { value ->
-                                    initialTimerValue = value
-                                }
+                                onBackClick = { currentScreen = Screen.Main },
+                                onTimerValueChanged = { value -> initialTimerValue = value },
+                                selectedColorIndex = selectedColorIndex,
+                                onColorSelected = { index -> selectedColorIndex = index }
                             )
 
                             Screen.Help -> HelpScreen(
