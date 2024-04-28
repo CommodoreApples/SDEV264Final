@@ -6,20 +6,25 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+
 
 @Composable
 fun CalculatorScreen(
     onBackClick: () -> Unit,
-    ) {
+    buttonColor: Color,
+) {
     val displayState = remember { mutableStateOf("0") }
 
     fun handleButtonClick(value: String) {
@@ -46,7 +51,7 @@ fun CalculatorScreen(
         }
     }
 
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(modifier = Modifier.fillMaxSize().padding(start = 16.dp)) {
         Text(
             text = "Calculator",
             modifier = Modifier.fillMaxWidth()
@@ -84,9 +89,10 @@ fun CalculatorScreen(
             CalculatorButton(text = "/", onClick = ::handleButtonClick)
         }
         Spacer(modifier = Modifier.height(16.dp))
-        Button(onClick = {
-            onBackClick()
-        }) {
+        Button(
+            onClick = { onBackClick() },
+            colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor) // Set button color
+        ) {
             androidx.compose.material.Text("Back")
         }
     }

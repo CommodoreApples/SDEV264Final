@@ -11,6 +11,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -26,7 +27,8 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun NoteTakingScreen(onBackClick: () -> Unit) {
+fun NoteTakingScreen(onBackClick: () -> Unit,
+                     buttonColor: Color) {
     var noteText by remember { mutableStateOf("") }
 
     Column(
@@ -52,9 +54,10 @@ fun NoteTakingScreen(onBackClick: () -> Unit) {
         )
         Spacer(modifier = Modifier.height(24.dp))
         // Back button
-        Button(onClick = {
-            onBackClick()
-        }) {
+        Button(
+            onClick = { onBackClick() },
+            colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor) // Set button color
+        ) {
             androidx.compose.material.Text("Back")
         }
     }

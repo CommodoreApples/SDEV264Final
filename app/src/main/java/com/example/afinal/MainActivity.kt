@@ -47,13 +47,18 @@ class MainActivity : ComponentActivity() {
                                 buttonColor = colorOptions[selectedColorIndex] // Pass selected color
                             )
                             Screen.Calculator -> CalculatorScreen(
-                                onBackClick = { currentScreen = Screen.Main}
+                                onBackClick = { currentScreen = Screen.Main},
+                                buttonColor = colorOptions[selectedColorIndex]
                             )
-                            Screen.Notes -> NoteTakingScreen(onBackClick = { currentScreen = Screen.Main })
+                            Screen.Notes -> NoteTakingScreen(
+                                onBackClick = { currentScreen = Screen.Main },
+                                buttonColor = colorOptions[selectedColorIndex]
+                                )
                             Screen.Calendar -> TODO()
                             Screen.Timer -> TimerScreen(
                                 initialTimerValue = initialTimerValue,
-                                onBackClick = { currentScreen = Screen.Main}
+                                onBackClick = { currentScreen = Screen.Main},
+                                buttonColor = colorOptions[selectedColorIndex]
                             )
                             Screen.Settings -> SettingsScreen(
                                 onBackClick = { currentScreen = Screen.Main },
@@ -63,7 +68,8 @@ class MainActivity : ComponentActivity() {
                             )
 
                             Screen.Help -> HelpScreen(
-                                onBackClick = { currentScreen = Screen.Main}
+                                onBackClick = { currentScreen = Screen.Main},
+                                buttonColor = colorOptions[selectedColorIndex]
                             )
                         }
                     }

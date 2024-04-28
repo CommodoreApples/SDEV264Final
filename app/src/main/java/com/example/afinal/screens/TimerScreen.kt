@@ -2,9 +2,11 @@ package com.example.afinal.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
@@ -13,7 +15,8 @@ import kotlinx.coroutines.launch
 @Composable
 fun TimerScreen(
     initialTimerValue: Int,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    buttonColor: Color
 ) {
     var timeRemaining by remember { mutableStateOf(initialTimerValue) }
     var timerRunning by remember { mutableStateOf(false) }
@@ -40,7 +43,9 @@ fun TimerScreen(
                     }
                 }
             }
-        }) {
+        },
+            colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor) // Set button color
+            ) {
             Text(text = "Start")
         }
 
@@ -48,7 +53,9 @@ fun TimerScreen(
 
         Button(onClick = {
             timerRunning = false
-        }) {
+        },
+            colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor) // Set button color
+            ) {
             Text(text = "Pause")
         }
 
@@ -57,14 +64,19 @@ fun TimerScreen(
         Button(onClick = {
             timeRemaining = initialTimerValue
             timerRunning = false
-        }) {
+        },
+            colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor) // Set button color
+            ) {
             Text(text = "Reset")
         }
 
         Spacer(modifier = Modifier.height(32.dp))
 
-        Button(onClick = onBackClick) {
-            Text(text = "Back")
+        Button(
+            onClick = { onBackClick() },
+            colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor) // Set button color
+        ) {
+            androidx.compose.material.Text("Back")
         }
     }
 }
